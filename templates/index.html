@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Housing Price Prediction</title>
+</head>
+<body>
+    <h1>Predict Housing Price</h1>
+    <form method="POST">
+        <label for="MedInc">Median Income: </label>
+        <input type="text" id="MedInc" name="MedInc"><br><br>
+
+        <label for="HouseAge">House Age: </label>
+        <input type="text" id="HouseAge" name="HouseAge"><br><br>
+
+        <label for="AveRooms">Average Rooms: </label>
+        <input type="text" id="AveRooms" name="AveRooms"><br><br>
+
+        <button type="submit">Submit</button>
+    </form>
+
+    {% if prediction is not none %}
+        <h2>Predicted Housing Price: ${{ prediction }}</h2>
+    {% endif %}
+</body>
+</html>
