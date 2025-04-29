@@ -1,0 +1,42 @@
+name: CI pipeline
+
+on:
+  push:
+    branches:
+      - staging
+
+jobs:
+  project-testing:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Install dependencies
+        run: |
+          pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install dvc
+
+      - name: Run DVC pipeline
+        env:
+          DAGSHUB_TOKEN: ${{ secrets.DAGSHUB_TOKEN }}
+        run: |
+          # Directly run the DVC pipeline without pulling
+          dvc repro
+      - name: Run model tests
+        env:
+          DAGSHUB_TOKEN: ${{ secrets.DAGSHUB_TOKEN }}
+        run: |
+          python -m unittest tests/model_test.py
+          
+      - name: Promote model to production
+        if: success()  # Only run if the previous step (model tests) was successful
+        env:
+          DAGSHUB_TOKEN: ${{ secrets.DAGSHUB_TOKEN }}  # Load DagsHub token from secrets
+        run: python scripts/production.py  # Run the production promotion script

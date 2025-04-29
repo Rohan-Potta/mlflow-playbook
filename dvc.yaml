@@ -1,0 +1,58 @@
+stages:
+# 1
+  data_collection:
+    #cmd -> Command To execute in this stage
+    cmd: python src/data/data_collection.py 
+    #deps -> Dependencies required for this stage
+    deps:
+    - src/data/data_collection.py
+    #params
+    params:
+    - data_collection.test_size
+    #outs -> This is the output produced by this stage, these are the files that are tracked by DVC
+    outs:
+    - data/raw
+# 2
+  pre_preprocessing:
+    cmd: python src/data/data_prep.py
+    deps:
+    - data/raw
+    - src/data/data_prep.py
+    outs:
+    - data/processed
+# 3
+  feature_engineering:
+    cmd: python src/data/feature_engineering.py
+    deps:
+    - data/raw
+    - src/data/feature_engineering.py
+    outs:
+    - data/features
+# 4
+  model_building:
+    cmd: python src/model/model_building.py
+    deps:
+    - data/processed
+    - src/model/model_building.py
+    params:
+    - model_building.n_estimators
+    outs:
+    - models/model.pkl
+# 5
+  model_eval:
+    cmd: python src/model/model_eval.py
+    deps:
+    - models/model.pkl
+    - src/model/model_eval.py
+    metrics:
+    - reports/metrics.json
+    outs:
+    - reports/run_info.json 
+
+# 6
+  model_registration:
+    cmd: python src/model/model_reg.py
+    deps:
+    - reports/run_info.json
+    - src/model/model_reg.py
+    
