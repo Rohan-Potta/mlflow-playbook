@@ -1,3 +1,4 @@
+# This script promotes the latest model in 'Staging' to 'Production' and archives the existing 'Production' model.
 import mlflow
 import os
 from mlflow.tracking import MlflowClient

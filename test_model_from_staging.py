@@ -1,3 +1,7 @@
+# This unittest-based script tests:
+# 1) If a model exists in 'Staging'
+# 2) If it loads correctly
+# 3) Its prediction performance against a threshold.
 import unittest
 import mlflow
 from mlflow.tracking import MlflowClient

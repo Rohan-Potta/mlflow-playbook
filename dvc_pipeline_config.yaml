@@ -1,3 +1,4 @@
+# DVC pipeline configuration defining all stages: from data collection to model registration.
 stages:
 # 1
   data_collection:

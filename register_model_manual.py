@@ -1,3 +1,4 @@
+# This script manually registers a model using a known run ID and model path.
 from mlflow.tracking import MlflowClient
 
 import mlflow

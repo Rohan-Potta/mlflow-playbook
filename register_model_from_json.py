@@ -1,3 +1,4 @@
+# This script registers a model using metadata (run ID and model name) from a JSON file and promotes it to 'Staging'.
 
 import json
 from mlflow.tracking import MlflowClient

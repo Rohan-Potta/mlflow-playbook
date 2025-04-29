@@ -1,3 +1,4 @@
+# GitHub Actions CI pipeline to run DVC stages, test models, and promote the model if tests pass.
 name: CI pipeline
 
 on:

@@ -1,3 +1,4 @@
+# This script loads a registered model from MLflow and makes predictions on a sample DataFrame.
 import mlflow.pyfunc
 import pandas as pd
 import mlflow

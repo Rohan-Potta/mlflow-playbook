@@ -1,3 +1,4 @@
+# This script transitions a specified model version to a new stage (e.g., 'Production').
 from mlflow.tracking import MlflowClient
 
 import mlflow
